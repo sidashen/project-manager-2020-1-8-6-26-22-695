@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: serif, 'Microsoft YaHei';
+}
+
+.story-cards {
+  margin: 40px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: white;
+}
+
+.story-card {
+  position: relative;
+  margin: 10px;
+  height: 120px;
+  width: 22%;
+  border-radius: 5px;
+}
+
+.all-story-card {
+  background-color: #31b48d;
+}
+
+.uncompleted-story-card {
+  background-color: #38a1f2;
+}
+
+.processing-story-card {
+  background-color: #7538c7;
+}
+
+.completed-story-card {
+  background-color: #3b67a4;
+}
+
+.iconfont {
+  position: absolute;
+  top: 7px;
+  right: 9px;
+  opacity: 0.3;
+  font-size: 100px;
+}
+
+.card-title {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  font-size: 14px;
+}
+
+.card-count {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.symbol {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 25px;
+  width: 35px;
+  line-height: 25px;
+  border-radius: 5px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.3);
+  font-size: 13px;
+}
+
+.show-percentage {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 30px;
+}
