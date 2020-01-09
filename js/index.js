@@ -1,7 +1,11 @@
 const API_ROOT = 'http://localhost:3000/projects';
 let projectList = document.getElementById('project-lists-main');
+let projectAllCount = document.getElementsByClassName('all-project')[0];
+let projectActiveCount = document.getElementsByClassName('active-project')[0];
+let projectPendingCount = document.getElementsByClassName('pending-project')[0];
+let projectClosedCount = document.getElementsByClassName('closed-project')[0];
 
-(function handleProductList(projectStatus) {
+(function handleProductList() {
   getListData();
 })();
 
@@ -14,7 +18,8 @@ function getListData() {
     success: function (res) {
       projectListData(res);
       const projectStatus = document.getElementsByClassName('single-status');
-      setFontColor(projectStatus);
+      const projectStatusArr = setFontColor(projectStatus);
+      setCount(projectStatusArr);
     },
   });
 }
@@ -40,7 +45,28 @@ function setFontColor(projectStatus) {
       item.style.color = '#f7da47';
     }
   });
+  return projectStatusArr;
 }
 
+function setCount(projectStatusArr) {
+  let allCount = 0;
+  let activeCount = 0;
+  let pendingCount = 0;
+  let closedCount = 0;
 
+  projectStatusArr.forEach(item => {
+    allCount ++;
+  if (item.innerHTML === 'ACTIVE') {
+    activeCount ++;
+  } else if (item.innerHTML === 'PENDING') {
+    pendingCount ++;
+  } else if (item.innerHTML === 'CLOSED') {
+    closedCount ++;
+  }
+  });
+  projectAllCount.innerHTML = Number(allCount);
+  projectActiveCount.innerHTML = Number(activeCount);
+  projectPendingCount.innerHTML = Number(pendingCount);
+  projectClosedCount.innerHTML = Number(closedCount);
+}
 
