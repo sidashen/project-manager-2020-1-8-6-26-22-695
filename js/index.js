@@ -2,9 +2,7 @@ const API_ROOT = 'http://localhost:3000/projects';
 let projectList = document.getElementById('project-lists-main');
 let id;
 
-(function handleProductList() {
-  getProjectListData();
-})();
+getProjectListData();
 
 function getProjectListData() {
   $.ajax({
@@ -15,7 +13,7 @@ function getProjectListData() {
       projectListData(res);
       const projectStatus = document.getElementsByClassName('single-status');
       setData(projectStatus);
-    },
+    }
   });
 }
 
@@ -28,10 +26,7 @@ function deleteProjectData(id, event) {
       deleteProject(id, event);
       const projectStatus = document.getElementsByClassName('single-status');
       setData(projectStatus);
-    },  // 请求成功后调用此方法
-    // fail: function(error) {
-    //   console.log('请求失败了哟');
-    // }    // 请求失败或出错后调用此方法
+    }
   });
 }
 
@@ -90,26 +85,25 @@ function confirm(event) {
 function deleteProject(id) {
   projectList.removeChild(document.getElementById(id));
   $('#mask').css('display','none');
-  // let item = $userList.querySelector(`li[data-id='${id}']`);
-  // $userList.removeChild(item);
 }
 
 $('body').click(event => {
-  const target = event.target.innerHTML;
-  if (target === '删除') {
+  let {classList} = event.target;
+
+  if (classList.contains('btn')) {
     confirm(event);
-  };
-  if (target === '取消') {
+  }
+  if (classList.contains('cancle-btn')) {
     event.target.parentNode.parentNode.style.display = 'none';
   }
-  if (target === '确认') {  
+  if (classList.contains('confirm-btn')) {
     deleteProjectData(id);
+  }
+  if (classList.contains('icon-guanbi')) {
+    event.target.parentNode.parentNode.style.display = 'none';
   }
 });
 
-$('.icon-guanbi').click(event => {
-  event.target.parentNode.parentNode.style.display = 'none';
-});
 
 
 
