@@ -1,9 +1,5 @@
 const API_ROOT = 'http://localhost:3000/projects';
 let projectList = document.getElementById('project-lists-main');
-let projectAllCount = document.getElementsByClassName('all-project')[0];
-let projectActiveCount = document.getElementsByClassName('active-project')[0];
-let projectPendingCount = document.getElementsByClassName('pending-project')[0];
-let projectClosedCount = document.getElementsByClassName('closed-project')[0];
 
 (function handleProductList() {
   getListData();
@@ -18,8 +14,7 @@ function getListData() {
     success: function (res) {
       projectListData(res);
       const projectStatus = document.getElementsByClassName('single-status');
-      const projectStatusArr = setFontColor(projectStatus);
-      setCount(projectStatusArr);
+      setData(projectStatus);
     },
   });
 }
@@ -34,39 +29,38 @@ function projectListData(res) {
   projectList.innerHTML = list;
 }
 
-function setFontColor(projectStatus) {
+function setData(projectStatus) {
   projectStatusArr = Array.from(projectStatus);
-  projectStatusArr.map(item => {
-    if (item.innerHTML === 'ACTIVE') {
-      item.style.color = '#666666';
-    } else if (item.innerHTML === 'PENDING') {
-      item.style.color = '#ee706d';
-    } else if (item.innerHTML === 'CLOSED') {
-      item.style.color = '#f7da47';
-    }
-  });
-  return projectStatusArr;
-}
-
-function setCount(projectStatusArr) {
   let allCount = 0;
   let activeCount = 0;
   let pendingCount = 0;
   let closedCount = 0;
 
-  projectStatusArr.forEach(item => {
+  projectStatusArr.map(item => {
     allCount ++;
-  if (item.innerHTML === 'ACTIVE') {
-    activeCount ++;
-  } else if (item.innerHTML === 'PENDING') {
-    pendingCount ++;
-  } else if (item.innerHTML === 'CLOSED') {
-    closedCount ++;
-  }
+    if (item.innerHTML === 'ACTIVE') {
+      item.style.color = '#666666';
+      activeCount ++;
+    } else if (item.innerHTML === 'PENDING') {
+      item.style.color = '#ee706d';
+      pendingCount ++;
+    } else if (item.innerHTML === 'CLOSED') {
+      item.style.color = '#f7da47';
+      closedCount ++;
+    }
   });
-  projectAllCount.innerHTML = Number(allCount);
-  projectActiveCount.innerHTML = Number(activeCount);
-  projectPendingCount.innerHTML = Number(pendingCount);
-  projectClosedCount.innerHTML = Number(closedCount);
+
+  let activePercent = Number(activeCount / allCount).toFixed(2) * 100;
+  let pendingPercent = Number(pendingCount / allCount).toFixed(2) * 100;
+  let closedPercent = Number(closedCount / allCount).toFixed(2) * 100;
+
+  $(".all-project").html(Number(allCount));
+  $('.active-project').html(Number(activeCount));
+  $('.pending-project').html(Number(pendingCount));
+  $('.closed-project').html(Number(closedCount));
+  $('.active-percent').html(`${activePercent}%`);
+  $('.pending-percent').html(`${pendingPercent}%`);
+  $('.closed-percent').html(`${closedPercent}%`);
 }
+
 
