@@ -17,13 +17,13 @@ function getProjectListData() {
   });
 }
 
-function deleteProjectData(id, event) {
+function deleteProjectData(id) {
   $.ajax({
     url: `${API_ROOT}/${id}`,
     type: 'delete',
     crossDomain: true,
     success: function(res) {
-      deleteProject(id, event);
+      deleteProject(id);
       const projectStatus = document.getElementsByClassName('single-status');
       setData(projectStatus);
     }
@@ -49,29 +49,36 @@ function setData(projectStatus) {
 
   projectStatusArr.map(item => {
     allCount ++;
-    if (item.innerHTML === 'ACTIVE') {
+    if ('ACTIVE' === item.innerHTML) {
       item.style.color = '#666666';
       activeCount ++;
-    } else if (item.innerHTML === 'PENDING') {
+    } else if ('PENDING' === item.innerHTML) {
       item.style.color = '#ee706d';
       pendingCount ++;
-    } else if (item.innerHTML === 'CLOSED') {
+    } else if ('CLOSED' === item.innerHTML) {
       item.style.color = '#f7da47';
       closedCount ++;
     }
   });
 
-  let activePercent = Number(activeCount / allCount).toFixed(2) * 100;
-  let pendingPercent = Number(pendingCount / allCount).toFixed(2) * 100;
-  let closedPercent = Number(closedCount / allCount).toFixed(2) * 100;
+  let activePercent = Math.floor((activeCount / allCount)* 100);
+  let pendingPercent = Math.floor((pendingCount / allCount) * 100);
+  let closedPercent = Math.floor((closedCount / allCount).toFixed(2) * 100);
 
   $(".all-project").html(Number(allCount));
   $('.active-project').html(Number(activeCount));
   $('.pending-project').html(Number(pendingCount));
   $('.closed-project').html(Number(closedCount));
-  $('.active-percent').html(`${activePercent}%`);
-  $('.pending-percent').html(`${pendingPercent}%`);
-  $('.closed-percent').html(`${closedPercent}%`);
+
+  if (0 === allCount) {
+    $('.active-percent').html(`0%`);
+    $('.pending-percent').html(`0%`);
+    $('.closed-percent').html(`0%`);
+  } else {
+    $('.active-percent').html(`${activePercent}%`);
+    $('.pending-percent').html(`${pendingPercent}%`);
+    $('.closed-percent').html(`${closedPercent}%`);
+  }
 }
 
 function confirm(event) {
