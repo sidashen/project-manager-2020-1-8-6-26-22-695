@@ -129,7 +129,7 @@ td {
   width: 180px;
 }
 
-.description {
+#description {
   display: -webkit-box;
   width: 100%;
 	-webkit-box-orient: vertical;
@@ -139,6 +139,22 @@ td {
 	text-overflow: ellipsis;
 }
 
-.description:hover {
+#description:hover {
   display: block;
+}
+
+.btn {
+  height: 33px;
+  width: 50px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ee706d;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn:active {
+  background-color: #ee706d;
+  transform: translateY(4px);
 }
