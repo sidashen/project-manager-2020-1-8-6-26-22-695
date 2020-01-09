@@ -9,7 +9,7 @@ body {
 }
 
 .story-cards {
-  margin: 40px 20px;
+  margin: 0 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -18,9 +18,9 @@ body {
 
 .story-card {
   position: relative;
-  margin: 10px;
+  margin: 20px 10px;
   height: 120px;
-  width: 22%;
+  width: 23.76%;
   border-radius: 5px;
 }
 
@@ -84,4 +84,36 @@ body {
   font-size: 32px;
   font-weight: 500;
   line-height: 30px;
+}
+
+.project-bar {
+  margin: 10px 20px;
+  font-size: 25px;
+}
+
+table {
+  position: absolute;
+  width: calc(100% - 40px);
+  margin: 20px 20px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-bottom: 1px solid #dcdee3;
+  color: #333;
+}
+
+th {
+  padding: 18px;
+  text-align: left;
+}
+
+thead {
+  background: #ebecf0;
+}
+
+.project-name {
+  width: 300px;
+}
+
+.deadline, .status, .operation {
+  width: 180px;
 }
