@@ -9,7 +9,7 @@ function getListData() {
   $.ajax({
     url: API_ROOT,
     type: 'get',
-    dataType: 'jsonp',  
+    // dataType: 'jsonp',  
     crossDomain: true,
     success: function (res) {
       projectListData(res);
