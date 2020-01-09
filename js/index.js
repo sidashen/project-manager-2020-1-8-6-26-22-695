@@ -9,7 +9,6 @@ function getListData() {
   $.ajax({
     url: API_ROOT,
     type: 'get',
-    // dataType: 'jsonp',  
     crossDomain: true,
     success: function (res) {
       projectListData(res);
@@ -63,4 +62,28 @@ function setData(projectStatus) {
   $('.closed-percent').html(`${closedPercent}%`);
 }
 
+function confirm() {
+  let doc = document.documentElement;
+  relHeight = (doc.clientHeight > doc.scrollHeight) ? doc.clientHeight : doc.scrollHeight;
+  $('#mask').height(`${relHeight}px`);
+  $('#mask').css('display','flex');
+}
 
+
+
+$('body').click(e => {
+  const target = e.target.innerHTML;
+  if (target === "删除") {
+    confirm();
+  }
+  if (target === "取消") {
+    e.target.parentNode.parentNode.style.display = 'none';
+  }
+});
+
+$('.icon-guanbi').click(e => {
+  e.target.parentNode.parentNode.style.display = 'none';
+});
+
+
+        
