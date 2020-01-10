@@ -5,35 +5,33 @@ let id;
 getProjectListData();
 
 function getProjectListData() {
-  $.ajax({
-    url: API_ROOT,
-    type: 'get',
-    crossDomain: true,
-    success: function (res) {
+  myAjax(API_ROOT, 
+    'get', 
+    {}, 
+    function (res) {
       projectListData(res);
       const projectStatus = document.getElementsByClassName('single-status');
       setData(projectStatus);
     }
-  });
+  );
 }
 
 function deleteProjectData(id) {
-  $.ajax({
-    url: `${API_ROOT}/${id}`,
-    type: 'delete',
-    crossDomain: true,
-    success: function(res) {
+  myAjax(`${API_ROOT}/${id}`, 
+    'delete', 
+    {}, 
+    function (res) {
       deleteProject(id);
       const projectStatus = document.getElementsByClassName('single-status');
       setData(projectStatus);
     }
-  });
+  );
 }
 
 function projectListData(res) {
   let list = '';
   res.forEach(item => {
-    list += `<tr id='${item.id}'><td>${item.name}</td><td><div id='description'>${item.description}</div></td>
+    list += `<tr id='${item.id}'><td>${item.name}</td><td><div class='description'>${item.description}</div></td>
     <td>${item.endTime}</td><td class='single-status'>${item.status}</td>
     <td><button class='btn'>删除</button></td></tr>`;
   });
@@ -94,6 +92,13 @@ function deleteProject(id) {
   $('#mask').css('display','none');
 }
 
+function updateProject(id, res) {
+  let updateTr = document.getElementById(id);
+  updateTr.innerHTML = `<tr id='${id}'><td>${res.name}</td><td><div class='description'>${res.description}</div></td>
+  <td>${res.endTime}</td><td class='single-status'>${res.status}</td>
+  <td><button class='btn'>删除</button></td></tr>`;
+}
+
 $('body').click(event => {
   let {classList} = event.target;
 
@@ -109,7 +114,12 @@ $('body').click(event => {
   if (classList.contains('icon-guanbi')) {
     event.target.parentNode.parentNode.style.display = 'none';
   }
+  if (classList.contains('description')) {
+    id = event.target.parentNode.parentNode.getAttribute('id');
+    updateProjectData(id);
+  }
 });
+
 
 
 
