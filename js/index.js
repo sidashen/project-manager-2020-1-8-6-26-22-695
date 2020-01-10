@@ -92,13 +92,6 @@ function deleteProject(id) {
   $('#mask').css('display','none');
 }
 
-function updateProject(id, res) {
-  let updateTr = document.getElementById(id);
-  updateTr.innerHTML = `<tr id='${id}'><td>${res.name}</td><td><div class='description'>${res.description}</div></td>
-  <td>${res.endTime}</td><td class='single-status'>${res.status}</td>
-  <td><button class='btn'>删除</button></td></tr>`;
-}
-
 $('body').click(event => {
   let {classList} = event.target;
 
@@ -113,10 +106,6 @@ $('body').click(event => {
   }
   if (classList.contains('icon-guanbi')) {
     event.target.parentNode.parentNode.style.display = 'none';
-  }
-  if (classList.contains('description')) {
-    id = event.target.parentNode.parentNode.getAttribute('id');
-    updateProjectData(id);
   }
 });
 
