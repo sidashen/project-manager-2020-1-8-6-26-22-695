@@ -26,7 +26,7 @@ function deleteProjectData(id) {
       setData(projectStatus);
     }
   );
-}
+} 
 
 function projectListData(res) {
   let list = '';
